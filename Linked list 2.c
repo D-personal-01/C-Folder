@@ -92,6 +92,56 @@ void add_l(){
 
 }
 
+void del_b(){
+
+    if (head==NULL){
+        printf("\nThere is no Linked list.\n");
+        return;
+    }
+    temp=head;
+    head=head->next;
+    free(temp);
+
+}
+
+
+void del_e(){
+    struct stud *temp1;
+    if (head==NULL){
+        printf("\nThere is no Linked list.\n");
+        return;
+    }
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+    temp1=head;
+    while(temp1->next!=NULL){
+        temp=temp1;
+        temp1=temp1->next;
+    }
+    temp->next=NULL;
+    free(temp1);
+
+}
+
+
+
+void del_l(){
+    struct stud *temp1;
+    if (head==NULL){
+        printf("\nThere is no Linked list.\n");
+        return;
+    }
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+
+}
+
 int main(){
 
     int c;
@@ -100,8 +150,8 @@ int main(){
 
 
     while(1){
-        printf("\n\nWhat do you want to do: \n 1.Display Linked list\n 2.Add node at beginning\n 3.Add at the end.\n 4.Insert at specific location.\n 5.Delete at beginning.\n 6.Delete at End.\n 7.Delete at specific location.\n 8.Delete whole list. \n 9.Exit");
-        printf("Enter your choice: ");
+        printf("\n\nWhat do you want to do: \n 1.Display Linked list\n 2.Add node at beginning\n 3.Add at the end.\n 4.Insert at specific location.\n 5.Delete at beginning.\n 6.Delete at End.\n 7.Delete at specific location.\n 8.Delete whole list. \n 9.Exit\n");
+        printf("\nEnter your choice: ");
         scanf("%d",&c);
 
     switch (c){
@@ -127,6 +177,7 @@ int main(){
         case 7:
             del_l();
             break;
+
         case 8:
 
             while(head!=NULL)
@@ -136,8 +187,10 @@ int main(){
                 free(temp);
             }
         case 9:
-            exit(0);
+            goto end;
 
             }
 }
+end:
+    return 0;
 }
