@@ -67,7 +67,7 @@ void merge(int *arr){
 
 int main(){
     int arr[10]={0};
-    int c,;
+    int c;
     while (1){
     printf("Operation choices: \n 1.Insertion \n 2.Deletion \n 3.Transversal \n 4.Reverse \n 5.Merge \n 6.Exit");
     printf("Enter the serial number of the operation you want to do:");
