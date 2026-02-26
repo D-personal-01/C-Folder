@@ -1,196 +1,222 @@
+//Name- Daksh Joshi E.no.- 01414002025
+//2. WAP to implement a Singly Linked List.
+
 #include<stdio.h>
 #include<stdlib.h>
-struct stud{
 
+struct stud {
     int roll;
     struct stud *next;
-
 };
 
-struct stud *head=NULL,*temp=NULL;
+struct stud *head = NULL;
 
 
+void display() {
+    struct stud *temp = head;
 
-void display(){
-    if(head==NULL){
+    if (head == NULL) {
         printf("\nThere is no list.\n");
         return;
     }
-    temp=head;
+
     printf("\n");
-    while(temp!=NULL){
-        printf("%d-> ",temp->roll);
-        temp=temp->next;
+    while (temp != NULL) {
+        printf("%d -> ", temp->roll);
+        temp = temp->next;
     }
     printf("NULL\n");
 }
 
 
+void add_b() {
+    struct stud *newnode = (struct stud*)malloc(sizeof(struct stud));
 
-void add_b(){
-    if (head==NULL){
-        temp=(struct stud*)malloc(sizeof(struct stud));
-        printf("\nEnter the roll number: ");
-        scanf("%d",&temp->roll);
-        head=temp;
-        head->next=NULL;
-        return;
-    }
+    if (!newnode) return;
 
-    temp=(struct stud*)malloc(sizeof(struct stud));
-    printf("\nEnter the roll number: ");
-    scanf("%d",&temp->roll);
-    temp->next=head;
-    head=temp;
+    printf("\nEnter roll number: ");
+    scanf("%d", &newnode->roll);
 
-}
-
-void add_e(){
-    struct stud *temp1;
-    if (head==NULL){
-        temp=(struct stud*)malloc(sizeof(struct stud));
-        printf("\nEnter the roll number: ");
-        scanf("%d",&temp->roll);
-        head=temp;
-        head->next=NULL;
-        return;
-    }
-
-    temp=(struct stud*)malloc(sizeof(struct stud));
-    printf("\nEnter the roll number: ");
-    scanf("%d",&temp->roll);
-    temp1=head;
-    while(temp1->next!=NULL){
-        temp1=temp1->next;
-    }
-    temp1->next=temp;
-    temp->next=NULL;
+    newnode->next = head;
+    head = newnode;
 }
 
 
+void add_e() {
+    struct stud *newnode = (struct stud*)malloc(sizeof(struct stud));
+    struct stud *temp;
 
-void add_l(){
-    int n,i;
-    printf("Enter the index where the element has to be inserted: ");
-    scanf("%d",&n);
-    struct stud *temp1;
-    if (head==NULL){
-        temp=(struct stud*)malloc(sizeof(struct stud));
-        printf("\nEnter the roll number:");
-        scanf("%d",&temp->roll);
-        head=temp;
-        head->next=NULL;
+    if (!newnode) return;
+
+    printf("\nEnter roll number: ");
+    scanf("%d", &newnode->roll);
+
+    newnode->next = NULL;
+
+    if (head == NULL) {
+        head = newnode;
         return;
     }
-    temp1=head;
-    for(i=1;i<=n-1;i++)
-    {
-        temp1=temp1->next;
-    }
-    temp->next=temp1->next;
-    temp1->next=temp;
 
+    temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newnode;
 }
 
-void del_b(){
 
-    if (head==NULL){
-        printf("\nThere is no Linked list.\n");
+void add_l() {
+    int pos, i;
+    struct stud *newnode, *temp;
+
+    printf("Enter position (starting from 1): ");
+    scanf("%d", &pos);
+
+    if (pos < 1) {
+        printf("Invalid position.\n");
         return;
     }
-    temp=head;
-    head=head->next;
+
+    newnode = (struct stud*)malloc(sizeof(struct stud));
+    if (!newnode) return;
+
+    printf("Enter roll number: ");
+    scanf("%d", &newnode->roll);
+
+    if (pos == 1) {
+        newnode->next = head;
+        head = newnode;
+        return;
+    }
+
+    temp = head;
+    for (i = 1; i < pos - 1 && temp != NULL; i++)
+        temp = temp->next;
+
+    if (temp == NULL) {
+        printf("Position out of range.\n");
+        free(newnode);
+        return;
+    }
+
+    newnode->next = temp->next;
+    temp->next = newnode;
+}
+
+
+void del_b() {
+    struct stud *temp;
+
+    if (head == NULL) {
+        printf("\nList is empty.\n");
+        return;
+    }
+
+    temp = head;
+    head = head->next;
     free(temp);
-
 }
 
 
-void del_e(){
-    struct stud *temp1;
-    if (head==NULL){
-        printf("\nThere is no Linked list.\n");
+void del_e() {
+    struct stud *temp, *prev;
+
+    if (head == NULL) {
+        printf("\nList is empty.\n");
         return;
     }
-    if (head->next == NULL) {
-        free(head);
-        head = NULL;
-        return;
-    }
-    temp1=head;
-    while(temp1->next!=NULL){
-        temp=temp1;
-        temp1=temp1->next;
-    }
-    temp->next=NULL;
-    free(temp1);
 
-}
-
-
-
-void del_l(){
-    struct stud *temp1;
-    if (head==NULL){
-        printf("\nThere is no Linked list.\n");
-        return;
-    }
     if (head->next == NULL) {
         free(head);
         head = NULL;
         return;
     }
 
+    temp = head;
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    prev->next = NULL;
+    free(temp);
 }
 
-int main(){
+
+void del_l() {
+    int pos, i;
+    struct stud *temp, *prev;
+
+    if (head == NULL) {
+        printf("\nList is empty.\n");
+        return;
+    }
+
+    printf("Enter position to delete: ");
+    scanf("%d", &pos);
+
+    if (pos < 1) {
+        printf("Invalid position.\n");
+        return;
+    }
+
+    if (pos == 1) {
+        del_b();
+        return;
+    }
+
+    temp = head;
+    for (i = 1; i < pos && temp != NULL; i++) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Position out of range.\n");
+        return;
+    }
+
+    prev->next = temp->next;
+    free(temp);
+}
+
+
+void delete_all() {
+    struct stud *temp;
+
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+
+    printf("All nodes deleted.\n");
+}
+
+
+int main() {
 
     int c;
-    head=NULL;
-    printf("This is your Linked list Lets start!!\n\n");
 
+    while (1) {
 
-    while(1){
-        printf("\n\nWhat do you want to do: \n 1.Display Linked list\n 2.Add node at beginning\n 3.Add at the end.\n 4.Insert at specific location.\n 5.Delete at beginning.\n 6.Delete at End.\n 7.Delete at specific location.\n 8.Delete whole list. \n 9.Exit\n");
-        printf("\nEnter your choice: ");
-        scanf("%d",&c);
+        printf("\n1.Display\n2.Add at beginning\n3.Add at end\n4.Insert at location\n5.Delete beginning\n6.Delete end\n7.Delete location\n8.Delete whole list\n9.Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &c);
 
-    switch (c){
+        switch (c) {
 
-        case 1:
-            display();
-            break;
-        case 2:
-            add_b();
-            break;
-        case 3:
-            add_e();
-            break;
-        case 4:
-            add_l();
-            break;
-        case 5:
-            del_b();
-            break;
-        case 6:
-            del_e();
-            break;
-        case 7:
-            del_l();
-            break;
-
-        case 8:
-
-            while(head!=NULL)
-            {
-                temp=head;
-                head=head->next;
-                free(temp);
-            }
-        case 9:
-            goto end;
-
-            }
-}
-end:
-    return 0;
+            case 1: display(); break;
+            case 2: add_b(); break;
+            case 3: add_e(); break;
+            case 4: add_l(); break;
+            case 5: del_b(); break;
+            case 6: del_e(); break;
+            case 7: del_l(); break;
+            case 8: delete_all(); break;
+            case 9: delete_all(); return 0;
+            default: printf("Invalid choice.\n");
+        }
+    }
 }

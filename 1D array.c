@@ -1,10 +1,18 @@
+//Name- Daksh Joshi E.no.- 01414002025
+//1. WAP to implement following operation on one dimensional array
+//(i) Insertion
+//(ii) Deletion
+//(iii) Traversal
+//(iv) Reverse
+//(v) Merge
+
 #include<stdio.h>
 
 void insertion(int *arr){
     int n;
-    printf("Enter the position of the element:");
+    printf("\nEnter the position of the element:");
     scanf("%d",&n);
-    printf("Enter the new Element:");
+    printf("\nEnter the new Element:");
     scanf("%d",&arr[n]);
 
 
@@ -12,7 +20,7 @@ void insertion(int *arr){
 
 void deletion(int *arr){
     int n;
-    printf("Enter the position of the element:");
+    printf("\nEnter the position of the element:");
     scanf("%d",&n);
     arr[n]=-1;
 }
@@ -69,8 +77,8 @@ int main(){
     int arr[10]={0};
     int c;
     while (1){
-    printf("Operation choices: \n 1.Insertion \n 2.Deletion \n 3.Transversal \n 4.Reverse \n 5.Merge \n 6.Exit");
-    printf("Enter the serial number of the operation you want to do:");
+    printf("\n\nOperation choices: \n 1.Insertion \n 2.Deletion \n 3.Transversal \n 4.Reverse \n 5.Merge \n 6.Exit");
+    printf("\nEnter the serial number of the operation you want to do:");
     scanf("%d",&c);
     switch(c){
     case 1:
