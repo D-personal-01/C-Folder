@@ -1,4 +1,3 @@
-//Name- Daksh Joshi E.no.- 01414002025
 //1. WAP to implement following operation on one dimensional array
 //(i) Insertion
 //(ii) Deletion

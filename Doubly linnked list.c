@@ -1,4 +1,3 @@
-//Name- Daksh Joshi E.no.- 01414002025
 //4. WAP to implement Doubly Linked Lists.
 
 #include<stdio.h>
