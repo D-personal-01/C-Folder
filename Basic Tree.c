@@ -10,6 +10,11 @@ struct Node {
 struct Node* createNode(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
+    if (newNode == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+
     newNode->data = value;
     newNode->left = NULL;
     newNode->right = NULL;
@@ -18,9 +23,10 @@ struct Node* createNode(int value) {
 }
 
 void inorder(struct Node* root) {
-    if (root == NULL)
+    if (root == NULL){
+        printf("Null tree\n");
         return;
-
+    }
     inorder(root->left);
     printf("%d ", root->data);
     inorder(root->right);
